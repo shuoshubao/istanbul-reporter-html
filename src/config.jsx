@@ -41,8 +41,20 @@ const MetricsRender = value => {
   return [covered, '/', total].join('')
 }
 
-export const MetricsPctRender = value => {
-  return [value, '%'].join('')
+export const MetricsPctRender = type => {
+  return (value, record) => {
+    const reportClasse = record.reportClasses[type]
+    return (
+      <Progress
+        percent={value}
+        status="active"
+        strokeLinecap="square"
+        strokeColor={ProgressColorsMap[reportClasse]}
+        trailColor="#fff"
+        style={{ paddingRight: 24 }}
+      />
+    )
+  }
 }
 
 export const MetricsSummaryRender = (type, isRender = true) => {
@@ -85,32 +97,14 @@ export const columns = [
     }
   },
   {
-    title: '',
-    width: 100,
-    dataIndex: ['metrics', 'statements', 'pct'],
-    onCell: getOnCell('statements'),
-    render: (value, record) => {
-      const { statements: reportClasse } = record.reportClasses
-      return (
-        <Progress
-          percent={value}
-          showInfo={false}
-          status="active"
-          strokeLinecap="square"
-          strokeColor={ProgressColorsMap[reportClasse]}
-          trailColor="#fff"
-        />
-      )
-    }
-  },
-  {
     title: 'Statements',
     dataIndex: ['metrics', 'statements', 'pct'],
     onCell: getOnCell('statements'),
-    render: MetricsPctRender
+    render: MetricsPctRender('statements')
   },
   {
     title: '',
+    align: 'right',
     dataIndex: ['metrics', 'statements'],
     onCell: getOnCell('statements'),
     render: MetricsRender
@@ -119,10 +113,11 @@ export const columns = [
     title: 'Branches',
     dataIndex: ['metrics', 'branches', 'pct'],
     onCell: getOnCell('branches'),
-    render: MetricsPctRender
+    render: MetricsPctRender('branches')
   },
   {
     title: '',
+    align: 'right',
     dataIndex: ['metrics', 'branches'],
     onCell: getOnCell('branches'),
     render: MetricsRender
@@ -131,10 +126,11 @@ export const columns = [
     title: 'Functions',
     dataIndex: ['metrics', 'functions', 'pct'],
     onCell: getOnCell('functions'),
-    render: MetricsPctRender
+    render: MetricsPctRender('functions')
   },
   {
     title: '',
+    align: 'right',
     dataIndex: ['metrics', 'functions'],
     onCell: getOnCell('functions'),
     render: MetricsRender
@@ -143,15 +139,28 @@ export const columns = [
     title: 'Lines',
     dataIndex: ['metrics', 'lines', 'pct'],
     onCell: getOnCell('lines'),
-    render: MetricsPctRender
+    render: MetricsPctRender('lines')
   },
   {
     title: '',
+    align: 'right',
     dataIndex: ['metrics', 'lines'],
     onCell: getOnCell('lines'),
     render: MetricsRender
   }
 ]
+
+const renderPctProgress = value => {
+  return (
+    <Progress
+      percent={value}
+      status="active"
+      strokeColor={cyan.primary}
+      trailColor="#fff"
+      style={{ paddingRight: 24 }}
+    />
+  )
+}
 
 export const getSummary = isDetail => {
   return () => {
@@ -166,23 +175,14 @@ export const getSummary = isDetail => {
     return (
       <Row style={{ background: '#fafafa' }}>
         <Cell>Summary</Cell>
-        <Cell>
-          <Progress
-            percent={statementsPct}
-            showInfo={false}
-            status="active"
-            strokeColor={cyan.primary}
-            trailColor="#fff"
-          />
-        </Cell>
-        <Cell>{MetricsPctRender(statementsPct)}</Cell>
-        <Cell>{MetricsSummaryRender('statements')}</Cell>
-        <Cell>{MetricsPctRender(branchesPct)}</Cell>
-        <Cell>{MetricsSummaryRender('branches')}</Cell>
-        <Cell>{MetricsPctRender(functionsPct)}</Cell>
-        <Cell>{MetricsSummaryRender('functions')}</Cell>
-        <Cell>{MetricsPctRender(linesPct)}</Cell>
-        <Cell>{MetricsSummaryRender('lines')}</Cell>
+        <Cell>{renderPctProgress(statementsPct)}</Cell>
+        <Cell align="right">{MetricsSummaryRender('statements')}</Cell>
+        <Cell>{renderPctProgress(branchesPct)}</Cell>
+        <Cell align="right">{MetricsSummaryRender('branches')}</Cell>
+        <Cell>{renderPctProgress(functionsPct)}</Cell>
+        <Cell align="right">{MetricsSummaryRender('functions')}</Cell>
+        <Cell>{renderPctProgress(linesPct)}</Cell>
+        <Cell align="right">{MetricsSummaryRender('lines')}</Cell>
       </Row>
     )
   }
