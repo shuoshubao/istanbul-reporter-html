@@ -79,15 +79,16 @@ export const columns = [
     title: 'File',
     dataIndex: 'file',
     width: (Math.max(7, maxFileLength) + 2) * 8,
+    onCell: getOnCell('statements'),
     render: value => {
       return <Link href={`#${value}`}>{value}</Link>
-    },
-    onCell: getOnCell('statements')
+    }
   },
   {
     title: '',
     width: 100,
     dataIndex: ['metrics', 'statements', 'pct'],
+    onCell: getOnCell('statements'),
     render: (value, record) => {
       const { statements: reportClasse } = record.reportClasses
       return (
@@ -100,56 +101,55 @@ export const columns = [
           trailColor="#fff"
         />
       )
-    },
-    onCell: getOnCell('statements')
+    }
   },
   {
     title: 'Statements',
     dataIndex: ['metrics', 'statements', 'pct'],
-    render: MetricsPctRender,
-    onCell: getOnCell('statements')
+    onCell: getOnCell('statements'),
+    render: MetricsPctRender
   },
   {
     title: '',
     dataIndex: ['metrics', 'statements'],
-    render: MetricsRender,
-    onCell: getOnCell('statements')
+    onCell: getOnCell('statements'),
+    render: MetricsRender
   },
   {
     title: 'Branches',
     dataIndex: ['metrics', 'branches', 'pct'],
-    render: MetricsPctRender,
-    onCell: getOnCell('branches')
+    onCell: getOnCell('branches'),
+    render: MetricsPctRender
   },
   {
     title: '',
     dataIndex: ['metrics', 'branches'],
-    render: MetricsRender,
-    onCell: getOnCell('branches')
+    onCell: getOnCell('branches'),
+    render: MetricsRender
   },
   {
     title: 'Functions',
     dataIndex: ['metrics', 'functions', 'pct'],
-    render: MetricsPctRender,
-    onCell: getOnCell('functions')
+    onCell: getOnCell('functions'),
+    render: MetricsPctRender
   },
   {
     title: '',
     dataIndex: ['metrics', 'functions'],
-    render: MetricsRender,
-    onCell: getOnCell('functions')
+    onCell: getOnCell('functions'),
+    render: MetricsRender
   },
   {
     title: 'Lines',
     dataIndex: ['metrics', 'lines', 'pct'],
-    render: MetricsPctRender,
-    onCell: getOnCell('lines')
+    onCell: getOnCell('lines'),
+    render: MetricsPctRender
   },
   {
     title: '',
     dataIndex: ['metrics', 'lines'],
-    render: MetricsRender,
-    onCell: getOnCell('lines')
+    onCell: getOnCell('lines'),
+    render: MetricsRender
   }
 ]
 
