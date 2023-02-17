@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ConfigProvider, Card, Table, Typography, Progress, Space, Button } from 'antd'
+import { ConfigProvider, Card, Table, Typography, Progress, Space, Button, theme } from 'antd'
 import { HomeOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
 import 'antd/dist/reset.css'
 import { StatsData, columns, getSummary, getDetailColumns } from './config'
+import { isDark, addListenerPrefersColorScheme } from './util'
 import './index.css'
 
 const { Text, Link } = Typography
+const { defaultAlgorithm, darkAlgorithm } = theme
 
 const { datetime, Summary, Details } = StatsData
 
@@ -71,7 +73,14 @@ const App = () => {
 }
 
 const Container = () => {
+  const [dark, setDark] = useState(isDark())
   const [hash, setHash] = useState(getHash())
+
+  useEffect(() => {
+    addListenerPrefersColorScheme(value => {
+      setDark(value)
+    })
+  }, [setDark])
 
   const hashchange = () => {
     setHash(getHash())
@@ -85,7 +94,12 @@ const Container = () => {
     }
   }, [])
   return (
-    <ConfigProvider componentSize="small">
+    <ConfigProvider
+      componentSize="small"
+      theme={{
+        algorithm: dark ? darkAlgorithm : defaultAlgorithm
+      }}
+    >
       <div style={{ padding: 12 }} key={hash}>
         <App />
       </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography, Progress, Table } from 'antd'
 import { red, yellow, green, cyan } from '@ant-design/colors'
 import { inflateRaw } from 'pako/dist/pako_inflate.js'
+import { add, map, isDark } from './util'
 
 const { Link } = Typography
 
@@ -17,22 +18,6 @@ const { StatsData } = window
 const { Summary, Details } = StatsData
 
 export { StatsData }
-
-const add = (a, b) => a + b
-
-const map = (arr, key) => {
-  return arr.map(v => v[key])
-}
-
-const get = (obj, path, defaultValue = undefined) => {
-  const travel = regexp =>
-    String.prototype.split
-      .call(path, regexp)
-      .filter(Boolean)
-      .reduce((res, key) => (res !== null && res !== undefined ? res[key] : res), obj)
-  const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/)
-  return result === undefined || result === obj ? defaultValue : result
-}
 
 const ColorsMap = {
   low: red[2],
@@ -88,7 +73,7 @@ const getOnCell = dataIndex => {
     const reportClasse = record.reportClasses[dataIndex]
     return {
       style: {
-        background: ColorsMap[reportClasse]
+        background: isDark() ? undefined : ColorsMap[reportClasse]
       }
     }
   }
@@ -206,7 +191,7 @@ export const getSummary = isDetail => {
     const { pct: functionsPct } = MetricsSummaryRender('functions', false)
     const { pct: linesPct } = MetricsSummaryRender('lines', false)
     return (
-      <Row style={{ background: '#fafafa' }}>
+      <Row style={{ background: isDark() ? undefined : '#fafafa' }}>
         <Cell>Summary</Cell>
         <Cell>{renderPctProgress(statementsPct)}</Cell>
         <Cell align="right">{MetricsSummaryRender('statements')}</Cell>
@@ -272,7 +257,7 @@ export const getDetailColumns = ({ maxLines, lineCoverage, annotatedCode }) => {
               dangerouslySetInnerHTML={{ __html: hits }}
               style={{
                 padding: '0 5px',
-                background: backgroundMap[covered]
+                background: isDark() ? undefined : backgroundMap[covered]
               }}
             />
           )

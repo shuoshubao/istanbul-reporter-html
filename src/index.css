@@ -1,3 +1,15 @@
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #000;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    background: #fff;
+  }
+}
+
 .missing-if-branch {
   display: inline-block;
   margin-right: 5px;
