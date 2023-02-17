@@ -224,11 +224,11 @@ const getDetailColumns = ({ maxLines, lineCoverage, annotatedCode }) => {
   const maxCoverageLength = Math.max(...lineCoverage.filter(v => v.covered === 'yes').map(v => v.hits.length))
   return [
     {
-      width: (Math.max(maxLineLength, 2) + 2) * 10,
+      width: (Math.max(maxLineLength, 2) + 1) * 10,
       onCell: () => {
         return {
           style: {
-            padding: '0 10px',
+            padding: '0 5px',
             textAlign: 'right',
             verticalAlign: 'top'
           }
@@ -237,9 +237,9 @@ const getDetailColumns = ({ maxLines, lineCoverage, annotatedCode }) => {
       render: () => {
         return lineCoverage.map((v, i) => {
           return (
-            <div key={i}>
-              <Link key={i}>{i + 1}</Link>
-            </div>
+            <Link key={i} style={{ display: 'block', lineHeight: '20px' }}>
+              {i + 1}
+            </Link>
           )
         })
       }
@@ -251,7 +251,8 @@ const getDetailColumns = ({ maxLines, lineCoverage, annotatedCode }) => {
           style: {
             padding: 0,
             textAlign: 'right',
-            verticalAlign: 'top'
+            verticalAlign: 'top',
+            lineHeight: '20px'
           }
         }
       },
@@ -281,16 +282,15 @@ const getDetailColumns = ({ maxLines, lineCoverage, annotatedCode }) => {
         return {
           style: {
             padding: '0 10px',
-            verticalAlign: 'top'
+            verticalAlign: 'top',
+            lineHeight: '20px'
           }
         }
       },
       render: () => {
-        // return <pre className="prettyprint lang-js" style={{lineHeight: '22px'}} />
         return (
-          <pre className="prettyprint lang-js" style={{ lineHeight: '22px' }}>
+          <pre className="prettyprint lang-js" style={{ lineHeight: '20px' }}>
             {annotatedCode.map((v, i) => {
-              // return v
               return <div key={i} dangerouslySetInnerHTML={{ __html: v }} />
             })}
           </pre>
@@ -320,7 +320,6 @@ const App = () => {
     return (
       <>
         <Home />
-
         <Detail />
       </>
     )
