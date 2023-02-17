@@ -15,7 +15,11 @@
     "email": "shuoshubao@gmail.com"
   },
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "prepublishOnly": "npm run build"
+  },
   "dependencies": {
     "pako": "^2.1.0"
   },
