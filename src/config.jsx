@@ -18,10 +18,20 @@ const { Summary, Details } = StatsData
 
 export { StatsData }
 
-export const add = (a, b) => a + b
+const add = (a, b) => a + b
 
-export const map = (arr, key) => {
+const map = (arr, key) => {
   return arr.map(v => v[key])
+}
+
+const get = (obj, path, defaultValue = undefined) => {
+  const travel = regexp =>
+    String.prototype.split
+      .call(path, regexp)
+      .filter(Boolean)
+      .reduce((res, key) => (res !== null && res !== undefined ? res[key] : res), obj)
+  const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/)
+  return result === undefined || result === obj ? defaultValue : result
 }
 
 const ColorsMap = {
@@ -86,12 +96,27 @@ const getOnCell = dataIndex => {
 
 const maxFileLength = Math.max(...map(Object.keys(Details), 'length'))
 
+const getSorter = (type, percent = false) => {
+  return {
+    compare: (a, b) => {
+      if (type === 'file') {
+        return a.file.localeCompare(b.file)
+      }
+      if (percent) {
+        return a.metrics[type].pct - b.metrics[type].pct
+      }
+      return a.metrics[type].total - b.metrics[type].total
+    }
+  }
+}
+
 export const columns = [
   {
     title: 'File',
     dataIndex: 'file',
     width: (Math.max(7, maxFileLength) + 2) * 8,
     onCell: getOnCell('statements'),
+    sorter: getSorter('file'),
     render: value => {
       return <Link href={`#${value}`}>{value}</Link>
     }
@@ -100,6 +125,7 @@ export const columns = [
     title: 'Statements',
     dataIndex: ['metrics', 'statements', 'pct'],
     onCell: getOnCell('statements'),
+    sorter: getSorter('statements', true),
     render: MetricsPctRender('statements')
   },
   {
@@ -107,12 +133,14 @@ export const columns = [
     align: 'right',
     dataIndex: ['metrics', 'statements'],
     onCell: getOnCell('statements'),
+    sorter: getSorter('statements', false),
     render: MetricsRender
   },
   {
     title: 'Branches',
     dataIndex: ['metrics', 'branches', 'pct'],
     onCell: getOnCell('branches'),
+    sorter: getSorter('branches', true),
     render: MetricsPctRender('branches')
   },
   {
@@ -120,12 +148,14 @@ export const columns = [
     align: 'right',
     dataIndex: ['metrics', 'branches'],
     onCell: getOnCell('branches'),
+    sorter: getSorter('branches', false),
     render: MetricsRender
   },
   {
     title: 'Functions',
     dataIndex: ['metrics', 'functions', 'pct'],
     onCell: getOnCell('functions'),
+    sorter: getSorter('functions', true),
     render: MetricsPctRender('functions')
   },
   {
@@ -133,12 +163,14 @@ export const columns = [
     align: 'right',
     dataIndex: ['metrics', 'functions'],
     onCell: getOnCell('functions'),
+    sorter: getSorter('functions', false),
     render: MetricsRender
   },
   {
     title: 'Lines',
     dataIndex: ['metrics', 'lines', 'pct'],
     onCell: getOnCell('lines'),
+    sorter: getSorter('lines', true),
     render: MetricsPctRender('lines')
   },
   {
@@ -146,6 +178,7 @@ export const columns = [
     align: 'right',
     dataIndex: ['metrics', 'lines'],
     onCell: getOnCell('lines'),
+    sorter: getSorter('lines', false),
     render: MetricsRender
   }
 ]
