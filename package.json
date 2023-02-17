@@ -1,0 +1,29 @@
+{
+  "name": "istanbul-reporter-html",
+  "version": "0.1.0",
+  "description": "A beautiful html reporter for Istanbul",
+  "files": [
+    "dist",
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuoshubao/istanbul-reporter-html.git"
+  },
+  "author": {
+    "name": "shuoshubao",
+    "email": "shuoshubao@gmail.com"
+  },
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {
+    "pako": "^2.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^3.1.0",
+    "antd": "^5.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^4.1.1"
+  }
+}
