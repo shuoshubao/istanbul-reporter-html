@@ -86,4 +86,3 @@ module.exports = class HtmlReport extends ReportBase {
     this.contentWriter.write(content)
   }
 }
-

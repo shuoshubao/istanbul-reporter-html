@@ -1,19 +1,25 @@
 {
   "name": "istanbul-reporter-html",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A beautiful html reporter for Istanbul",
-  "files": [
-    "dist",
-    "index.js"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/shuoshubao/istanbul-reporter-html"
   },
+  "files": [
+    "dist",
+    "index.js"
+  ],
   "author": {
     "name": "shuoshubao",
     "email": "shuoshubao@gmail.com"
   },
+  "keywords": [
+    "istanbul",
+    "formatter",
+    "istanbul-formatter",
+    "istanbul-formatter-html"
+  ],
   "license": "MIT",
   "scripts": {
     "start": "vite",
