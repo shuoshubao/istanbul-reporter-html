@@ -1,6 +1,6 @@
 # istanbul-reporter-html
 
-A enhanced ESLint formatter
+A beautiful html reporter for Istanbul.
 
 # Examples
 
