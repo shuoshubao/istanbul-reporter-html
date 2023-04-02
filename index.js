@@ -4,6 +4,17 @@ const { ReportBase } = require('istanbul-lib-report')
 const annotator = require('istanbul-reports/lib/html/annotator')
 const { deflateRaw } = require('pako')
 
+const chunk = (array, size = 1) => {
+  const { length } = array
+  const result = Array(Math.ceil(length / size))
+  let index = 0
+  let resIndex = 0
+  while (index < length) {
+    result[resIndex++] = array.slice(index, (index += size))
+  }
+  return result
+}
+
 const getFileContent = fileName => {
   return readFileSync(resolve(__dirname, fileName)).toString()
 }
@@ -79,9 +90,10 @@ module.exports = class HtmlReport extends ReportBase {
 
   onEnd() {
     StatsData.datetime = Date.now()
+    const array = chunk(deflateData(StatsData).toString().split(','), 100).map(v => v.join(','))
     const content = getFileContent('./dist/index.html').replace(
       '<script src="docs/StatsData.js">',
-      `<script>window.StatsData = '${deflateData(StatsData)}'`
+      `<script>window.StatsData = ${JSON.stringify(array)}`
     )
     this.contentWriter.write(content)
   }

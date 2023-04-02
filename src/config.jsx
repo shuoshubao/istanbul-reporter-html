@@ -6,8 +6,9 @@ import { add, map, isDark } from './util'
 
 const { Link } = Typography
 
-const inflateData = str => {
-  return JSON.parse(inflateRaw(new Uint8Array(str.split(',')), { to: 'string' }))
+const inflateData = data => {
+  const array = (Array.isArray(data) ? data.join(',') : data).split(',')
+  return JSON.parse(inflateRaw(new Uint8Array(array), { to: 'string' }))
 }
 
 window.OriginalStatsData = window.StatsData
