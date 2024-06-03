@@ -58,7 +58,7 @@ module.exports = class HtmlReport extends ReportBase {
         const children = node.getChildren();
         const skipEmpty = this.skipEmpty;
 
-        children.forEach(child => {
+        StatsData.Summary = children.map(child => {
             const metrics = child.getCoverageSummary();
             const isEmpty = metrics.isEmpty();
             if (skipEmpty && isEmpty) {
@@ -75,12 +75,11 @@ module.exports = class HtmlReport extends ReportBase {
                     branches: context.classForPercent('branches', metrics.branches.pct)
                 };
             }
-            const data = {
+            return {
                 metrics: isEmpty ? fixPct(metrics) : metrics,
                 reportClasses,
                 file: child.getRelativeName()
             };
-            StatsData.Summary.push(data);
         });
     }
 
