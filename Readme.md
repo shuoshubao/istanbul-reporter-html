@@ -4,7 +4,7 @@ A beautiful html reporter for Istanbul.
 
 # Examples
 
-- https://shuoshubao.github.io/istanbul-reporter-html
+-   https://shuoshubao.github.io/istanbul-reporter-html
 
 # Install
 

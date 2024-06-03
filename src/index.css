@@ -1,73 +1,73 @@
 @media (prefers-color-scheme: dark) {
-  html {
-    background: #000;
-  }
+    html {
+        background: #000;
+    }
 }
 
 @media (prefers-color-scheme: light) {
-  html {
-    background: #fff;
-  }
+    html {
+        background: #fff;
+    }
 }
 
 .missing-if-branch {
-  display: inline-block;
-  margin-right: 5px;
-  border-radius: 3px;
-  position: relative;
-  padding: 0 4px;
-  background: #333;
-  color: yellow;
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 3px;
+    position: relative;
+    padding: 0 4px;
+    background: #333;
+    color: yellow;
 }
 
 .skip-if-branch {
-  display: none;
-  margin-right: 10px;
-  position: relative;
-  padding: 0 4px;
-  background: #ccc;
-  color: white;
+    display: none;
+    margin-right: 10px;
+    position: relative;
+    padding: 0 4px;
+    background: #ccc;
+    color: white;
 }
 
 .missing-if-branch .typ,
 .skip-if-branch .typ {
-  color: inherit !important;
+    color: inherit !important;
 }
 
 .keyline-all {
-  border: 1px solid #ddd;
+    border: 1px solid #ddd;
 }
 
 .status-line {
-  height: 10px;
+    height: 10px;
 }
 
 .cbranch-no {
-  background: yellow;
-  color: #111;
+    background: yellow;
+    color: #111;
 }
 
 .cstat-no,
 .fstat-no {
-  background: #f6c6ce;
+    background: #f6c6ce;
 }
 
 .cstat-skip {
-  background: #ddd;
-  color: #111;
+    background: #ddd;
+    color: #111;
 }
 
 .fstat-skip {
-  background: #ddd;
-  color: #111 !important;
+    background: #ddd;
+    color: #111 !important;
 }
 
 .cbranch-skip {
-  background: #ddd !important;
-  color: #111;
+    background: #ddd !important;
+    color: #111;
 }
 
 .ignore-none {
-  color: #999;
-  font-weight: normal;
+    color: #999;
+    font-weight: normal;
 }
