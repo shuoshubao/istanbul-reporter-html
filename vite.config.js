@@ -1,5 +1,5 @@
-import { resolve } from 'path'
 import react from '@vitejs/plugin-react'
+import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { name } from './package'
 
 export default ({ mode }) => {
@@ -15,6 +15,15 @@ export default ({ mode }) => {
         }
       }
     },
-    plugins: [react()]
+    plugins: [
+      react(),
+      viteExternalsPlugin({
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        dayjs: 'dayjs',
+        antd: 'antd',
+        lodash: '_'
+      })
+    ]
   }
 }

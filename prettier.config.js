@@ -1,7 +1,12 @@
 module.exports = {
-  printWidth: 120,
-  semi: false,
+  printWidth: 160,
+  useTabs: false,
+  tabWidth: 4,
+  semi: true,
   singleQuote: true,
   trailingComma: 'none',
-  arrowParens: 'avoid'
+  proseWrap: 'never',
+  arrowParens: 'avoid',
+  bracketSpacing: true,
+  htmlWhitespaceSensitivity: 'ignore'
 }
