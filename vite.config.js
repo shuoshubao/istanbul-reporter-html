@@ -1,11 +1,18 @@
+/*
+ * @Author: shuoshubao
+ * @Date: 2024-06-03 19:34:25
+ * @LastEditors: shuoshubao
+ * @LastEditTime: 2024-06-07 16:37:51
+ * @Description:
+ */
 import react from '@vitejs/plugin-react';
 import { viteExternalsPlugin } from 'vite-plugin-externals';
-import { name } from './package';
+import { name, version } from './package';
 
 export default ({ mode }) => {
     const isDevelopment = mode === 'development';
     return {
-        base: isDevelopment ? '/' : `https://unpkg.com/${name}@latest/dist/`,
+        base: isDevelopment ? '/' : `https://unpkg.com/${name}@${version}/dist/`,
         build: {
             assetsDir: '.',
             rollupOptions: {

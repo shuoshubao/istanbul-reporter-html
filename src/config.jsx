@@ -1,12 +1,12 @@
 import { cyan, green, red, yellow } from '@ant-design/colors';
 import { Progress, Table, Typography } from 'antd';
-import { inflateRaw } from 'pako/dist/pako_inflate.js';
 import React from 'react';
 import { add, isDark, map } from './util';
 
 const { Link } = Typography;
 
 const inflateData = data => {
+    const { inflateRaw } = window.pako;
     const array = (Array.isArray(data) ? data.join(',') : data).split(',');
     return JSON.parse(inflateRaw(new Uint8Array(array), { to: 'string' }));
 };

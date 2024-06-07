@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync } = require('fs');
 const { resolve } = require('path');
 const { ReportBase } = require('istanbul-lib-report');
 const annotator = require('istanbul-reports/lib/html/annotator');
